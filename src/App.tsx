@@ -1,4 +1,4 @@
-import { Flex, Input, List } from 'antd';
+import { Flex, List } from 'antd';
 import { Canvg, RenderingContext2D } from 'canvg';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import './App.css';
@@ -86,27 +86,6 @@ function App() {
 	return (
 		<div>
 			<Flex gap={100} vertical>
-				<Flex
-					vertical
-					gap={10}
-					justify='center'
-					align='center'
-					style={{
-						width: '100%',
-					}}>
-					<Flex gap={10}>
-						<Input value={comName} onChange={handleChange} />
-						<button
-							onClick={() => {
-								console.log('draw');
-							}}>
-							Draw
-						</button>
-					</Flex>
-
-					{/* <canvas ref={canvasRef} /> */}
-				</Flex>
-
 				<List
 					grid={{ gutter: 16, column: 4 }}
 					dataSource={data}

@@ -4,6 +4,7 @@ import {
 	SealDemoProps,
 	bigCircleRadius,
 	starSize,
+	svgSealType1Path,
 	svgSealType2Path,
 	svgStarPath,
 } from './constant';
@@ -28,27 +29,28 @@ const SealDemo = ({ type, companyName, bold }: SealDemoProps) => {
 				height: centerY,
 				radius: bigCircleRadius,
 			});
-			if (bold) {
-				drawSealType2({
-					context,
-					width: centerX,
-					height: centerY,
-					radius: bigCircleRadius - 33,
-				});
-			} else {
-				drawCircle({
-					context,
-					width: centerX,
-					height: centerY,
-					radius: bigCircleRadius - 20,
-				});
-				drawSealType1({
-					context,
-					width: centerX,
-					height: centerY,
-					radius: bigCircleRadius - 33,
-				});
-			}
+			// if (bold) {
+			drawSealType({
+				context,
+				width: centerX,
+				height: centerY,
+				radius: bigCircleRadius - 33,
+				bold,
+			});
+			// } else {
+			// 	drawCircle({
+			// 		context,
+			// 		width: centerX,
+			// 		height: centerY,
+			// 		radius: bigCircleRadius - 20,
+			// 	});
+			// 	drawSealType1({
+			// 		context,
+			// 		width: centerX,
+			// 		height: centerY,
+			// 		radius: bigCircleRadius - 33,
+			// 	});
+			// }
 
 			if (type === 'star') {
 				drawStart({
@@ -88,6 +90,7 @@ const SealDemo = ({ type, companyName, bold }: SealDemoProps) => {
 		[array[index1], array[index2]] = [array[index2], array[index1]];
 	};
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const drawSealType1 = ({ context, width, height, radius }: DrawProps) => {
 		const letters = '대표이사';
 		const characters = letters.split('');
@@ -114,7 +117,7 @@ const SealDemo = ({ type, companyName, bold }: SealDemoProps) => {
 		context.restore();
 	};
 
-	const drawSealType2 = ({ context, width, height, radius }: DrawProps) => {
+	const drawSealType = ({ context, width, height, radius, bold }: DrawProps) => {
 		const starX = width - 31;
 		const starY = height - radius! - 15;
 
@@ -122,7 +125,7 @@ const SealDemo = ({ type, companyName, bold }: SealDemoProps) => {
 		context.translate(starX, starY);
 		context.scale(starSize / 2.4, starSize / 2.4);
 
-		const path2D = new Path2D(svgSealType2Path);
+		const path2D = new Path2D(bold ? svgSealType2Path : svgSealType1Path);
 
 		context.fillStyle = 'red';
 		context.fill(path2D, 'evenodd');
